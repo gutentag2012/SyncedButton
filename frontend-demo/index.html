@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Button</title>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css' rel='stylesheet'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
+    <script src='client.js' type='module'></script>
+    <style>
+        :root {
+            --accent : #FF5722;
+        }
+
+        html, body {
+            height  : 100vh;
+            margin  : 0;
+            padding : 0;
+        }
+
+        ol {
+            display       : flex;
+            flex-wrap     : wrap;
+            padding       : 0 0 0 16px;
+            list-style    : none;
+            counter-reset : li;
+            gap           : 8px 32px;
+        }
+
+        li::before {
+            position : absolute;
+            top      : 4px;
+            left     : -16px;
+            content  : counter(li);
+            color    : var(--accent);
+        }
+
+        li {
+            position          : relative;
+            padding           : 4px 8px;
+            counter-increment : li;
+            border-radius     : 4px;
+        }
+
+        .accent-text {
+            color : var(--accent);
+        }
+
+        .spinner-accent-only {
+            border-color : var(--accent);
+        }
+
+        .input-field input, .input-field label {
+            color : #FFFFFF !important;
+        }
+
+        .input-field input:focus {
+            border-bottom : 1px solid var(--accent) !important;
+            box-shadow    : 0 1px 0 0 var(--accent) !important;
+        }
+
+        #btn-send {
+            flex-grow : 1;
+        }
+
+        #loading-page {
+            /*display : none;*/
+        }
+
+        #join-room-page {
+            display : none;
+        }
+
+        #room-page {
+            display        : none;
+            flex-direction : column;
+            height         : 100%;
+            padding-bottom : 16px;
+        }
+
+        .mat-progress-spinner circle, .mat-spinner circle {
+            stroke : #3FB53F;
+        }
+    </style>
+</head>
+<body class='container grey darken-4 white-text'>
+<div id='loading-page'>
+    <h1>Welcome to <span class='accent-text'>Button</span></h1>
+    <h5>Please be patient, we are connecting...</h5>
+    <div class='preloader-wrapper active'>
+        <div class='spinner-layer spinner-accent-only'>
+            <div class='circle-clipper left'>
+                <div class='circle'></div>
+            </div>
+            <div class='gap-patch'>
+                <div class='circle'></div>
+            </div>
+            <div class='circle-clipper right'>
+                <div class='circle'></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id='join-room-page'>
+    <h1>Connect to <span class='accent-text'>Room</span>...</h1>
+    <form id='form-connect' autocomplete='off'>
+        <div class='input-field darken-1 col s3'>
+            <label for='input-room'>
+                Room Code
+            </label>
+            <input id='input-room' type='number'>
+        </div>
+        <div class='input-field darken-1 col s7'>
+            <label for='input-username'>
+                Username
+            </label>
+            <input id='input-username' type='text'>
+        </div>
+        <div class='col s2'>
+            <button class='btn waves-effect waves-light deep-orange white-text' id='btn-connect' type='submit'>
+                Connect
+            </button>
+        </div>
+    </form>
+</div>
+<div id='room-page'>
+    <h5>Room Code:
+        <span class='accent-text' id='room-id'></span>
+    </h5>
+    <ol id='names-container'>
+        <li>James</li>
+        <li>Jonathan</li>
+    </ol>
+    <button class='btn waves-effect waves-light deep-orange white-text' id='btn-send'>
+        Click
+    </button>
+</div>
+</body>
+</html>
